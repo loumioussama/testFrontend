@@ -1,0 +1,111 @@
+<div class="container">
+  <div class="row justify-content-md-center">
+    <!-- <div class="col col-lg-2">
+        1 of 3
+      </div>
+      <div class="col-md-auto">
+        Variable width content
+      </div>
+      <div class="col col-lg-2">
+        3 of 3
+      </div> -->
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">FirstName</th>
+          <th scope="col">LastName</th>
+          <th scope="col">update</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of users ; let i= index">
+        <tr>
+          <th scope="row">{{i+1}}</th>
+          <td>{{user.firstName}}</td>
+          <td>{{user.lastName}}</td>
+          <td><button type="button" class="btn btn-primary" (click)="open(content,user)">Update</button>
+          </td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Delete</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header">
+
+    <h3>Update User</h3>
+    <div class="">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email"
+        [(ngModel)]="user.email">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">First Name</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        placeholder="firstName" [(ngModel)]="user.firstName">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Last Name</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        placeholder="lastName" [(ngModel)]="user.lastName">
+    </div>
+
+    <div class="center">
+      <button (click)="updateUser()" class="btn btn-primary">update</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #createUserModal let-modal>
+  <div class="modal-header">
+
+    <h3>Create new User</h3>
+    <div class="">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email"
+        [(ngModel)]="newUser.email">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">First Name</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        placeholder="firstName" [(ngModel)]="newUser.firstName">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputEmail1">Last Name</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+        placeholder="lastName" [(ngModel)]="newUser.lastName">
+    </div>
+
+    <div class="center">
+      <button (click)="createUser()" class="btn btn-primary">Add new user</button>
+    </div>
+  </div>
+</ng-template>
+
+<div class="center">
+  <button (click)="open(createUserModal,null)" class="btn btn-success">Add new user</button>
+</div>
